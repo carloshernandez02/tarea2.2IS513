@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
       '/': (BuildContext context) => LoginPage(),
-      '/register': (BuildContext context) => const RegisterPage(),
+      '/register': (BuildContext context) => RegisterPage(),
       '/home': (BuildContext context) => const HomePage(),
       },
     );
