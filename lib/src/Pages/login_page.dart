@@ -44,7 +44,7 @@ class LoginPage extends StatelessWidget {
 
                 SizedBox(height: 32),
                 
-                GreatButton(text: 'Iniciar Sesion'),
+                GreatButton(text: 'Iniciar Sesion', onPush: (){},),
 
                 SizedBox(height: 12),
 
@@ -52,7 +52,7 @@ class LoginPage extends StatelessWidget {
 
                 SizedBox(height: 12),
                 
-                GreatButton(text: 'Crear Cuenta'),
+                GreatButton(text: 'Crear Cuenta', onPush: (){},),
               ],
             ),
           ),
