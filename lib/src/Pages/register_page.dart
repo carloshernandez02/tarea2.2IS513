@@ -1,4 +1,3 @@
-import 'package:app_login/src/Pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app_login/src/Widgets/text_input_box.dart';
 import 'package:app_login/src/Widgets/a_button.dart';
