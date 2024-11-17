@@ -26,7 +26,7 @@ class LoginPage extends StatelessWidget {
             child: Column(
               children:[
 
-                SizedBox(height: 32),
+                SizedBox(height: 16),
 
                 Center(
                   child: Text('Ingrese sus credenciales',

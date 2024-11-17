@@ -7,29 +7,40 @@ class TextInputBox extends StatefulWidget {
     required this.title,
     this.keyboardType = TextInputType.text,
     required this.preIcon,
-    this.maxLength,
-    this.isLast = true
+    this.maxChars,
+    this.minChars,
+    this.isLast = true,
+    this.isPassword = false,
+    this.isEmail = false,
+    this.validador
   });
 
-  final int? maxLength;
+  final String? Function(String?)? validador;
+  final int? minChars;
+  final int? maxChars;
   final TextEditingController controller;
   final String title;
   final TextInputType keyboardType;
   final IconData preIcon;
   final bool isLast;
+  final bool isPassword;
+  final bool isEmail;
 
   @override
   State<TextInputBox> createState() => _TextInputBoxState();
 }
 
 class _TextInputBoxState extends State<TextInputBox> {
-  bool visiblePassword = true;
+  bool visiblePassword = false;
+
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: TextFormField(
-        textInputAction: widget.isLast ? TextInputAction.done:TextInputAction.next,
-        maxLength: widget.maxLength,
+    return TextFormField(
+      
+        validator: widget.validador,
+        textInputAction: 
+          widget.isLast ? TextInputAction.done:TextInputAction.next,
+        maxLength: widget.maxChars,
         controller: widget.controller,
         keyboardType: widget.keyboardType,
         obscureText: visiblePassword,
@@ -53,7 +64,6 @@ class _TextInputBoxState extends State<TextInputBox> {
                 },
               ) : null
             ),
-      ),
-    );
+      );
   }
 }
