@@ -31,12 +31,18 @@ class TextInputBox extends StatefulWidget {
 }
 
 class _TextInputBoxState extends State<TextInputBox> {
-  bool visiblePassword = false;
+  late bool visiblePassword;
 
+  @override
+  void initState() {
+    super.initState();
+    visiblePassword = widget.keyboardType == TextInputType.visiblePassword;
+  }
+  
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      
+
         validator: widget.validador,
         textInputAction: 
           widget.isLast ? TextInputAction.done:TextInputAction.next,

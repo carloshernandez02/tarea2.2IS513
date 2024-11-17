@@ -5,7 +5,6 @@ import 'package:app_login/src/pseudoAPI/accounts.dart';
 import 'package:flutter/material.dart';
 import 'package:app_login/src/Widgets/text_input_box.dart';
 import 'package:app_login/src/Widgets/a_button.dart';
-import 'package:app_login/src/pseudoAPI/class_objects/cuenta.dart';
 
 
 class LoginPage extends StatelessWidget {
@@ -55,13 +54,13 @@ class LoginPage extends StatelessWidget {
                   if(CuentaManager().cuentaMap.containsKey(_controller.text.toLowerCase())){
                     if(_passwordController.text == CuentaManager().cuentaMap[_controller.text.toLowerCase()]!.pwd){
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Inicio de sesion exitoso')));
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage(cuentaLog: CuentaManager().cuentaMap[_controller.text.toLowerCase()],)));
+                    }else{
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('''
+Inicio de sesion fallido, verifique su entrada y vuelva a intentar, o cree una cuenta''')));
                     }
                   }
-                  else{
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('''
-Inicio de sesion fallido, verifique su entrada y vuelva a intentar, o cree una cuenta''')));
-                  }
+
                 },),
 
                 SizedBox(height: 12),
