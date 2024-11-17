@@ -170,7 +170,7 @@ class RegisterPage extends StatelessWidget {
                           pwd: _passwordController.text
                         ));
                         CuentaManager().cuentaMap[_emailController.text]!.printCuenta();
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> LoginPage()));
+                        Navigator.pop(context);
                         
                       }else{
                         //formulario invalido
