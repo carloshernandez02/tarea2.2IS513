@@ -1,9 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:app_login/src/Pages/home_page.dart';
 import 'package:app_login/src/Pages/register_page.dart';
+import 'package:app_login/src/pseudoAPI/accounts.dart';
 import 'package:flutter/material.dart';
 import 'package:app_login/src/Widgets/text_input_box.dart';
 import 'package:app_login/src/Widgets/a_button.dart';
+import 'package:app_login/src/pseudoAPI/class_objects/cuenta.dart';
+
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -49,9 +52,16 @@ class LoginPage extends StatelessWidget {
                 SizedBox(height: 22),
                 
                 GreatButton(text: 'Iniciar Sesion', onPush: (){
-                  //TODO: verificar input de las credenciales
-                  
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()));
+                  if(CuentaManager().cuentaMap.containsKey(_controller.text.toLowerCase())){
+                    if(_passwordController.text == CuentaManager().cuentaMap[_controller.text.toLowerCase()]!.pwd){
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Inicio de sesion exitoso')));
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
+                    }
+                  }
+                  else{
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('''
+Inicio de sesion fallido, verifique su entrada y vuelva a intentar, o cree una cuenta''')));
+                  }
                 },),
 
                 SizedBox(height: 12),

@@ -2,6 +2,8 @@ import 'package:app_login/src/Pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:app_login/src/Widgets/text_input_box.dart';
 import 'package:app_login/src/Widgets/a_button.dart';
+import 'package:app_login/src/pseudoAPI/accounts.dart';
+import 'package:app_login/src/pseudoAPI/class_objects/cuenta.dart';
 
 class RegisterPage extends StatelessWidget {
   RegisterPage({super.key});
@@ -157,14 +159,22 @@ class RegisterPage extends StatelessWidget {
                     SizedBox(height: 32),
                     
                     GreatButton(text: 'Crear cuenta', onPush: (){
-                      //TODO: verificar input de las credenciales
                       if(_llaveFormulario.currentState!.validate()){
                         //formulario valido
                         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Formulario Valido')));
+                        
+                        CuentaManager().addCuenta(Cuenta(
+                          correo: _emailController.text.toLowerCase(), 
+                          nombre: _nameController.text, 
+                          numero: _numberController.text, 
+                          pwd: _passwordController.text
+                        ));
+                        CuentaManager().cuentaMap[_emailController.text]!.printCuenta();
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> LoginPage()));
+                        
                       }else{
                         //formulario invalido
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('GAAAAAAAAAAAAA')));
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Hay valores invalidos, favor verifiquelos y vuelva a intentar')));
                       }
                     },),
                   ],
